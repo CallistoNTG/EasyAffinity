@@ -10,11 +10,13 @@ using System.Diagnostics;
 using System.ComponentModel;
 
 namespace EasyAffinity {
-    //This is a simple, easy to use program that simplifies the task of fixing games that require certain CPU affinity settings to operate properly. It replaces the game's original executable with one that redirects to a batch file that sets the game affinity at boot.
+    //This is a simple, easy to use program that simplifies the task of fixing games that require certain CPU affinity settings to operate properly.
+    //It replaces the game's original executable with one that redirects to a batch file that sets the game affinity at boot.
+    //Under Windows 10 at least, setting the game to Windows XP or older Compatibility Mode will force single core affinity, but I like having options.
     class Program {
         static void Main(string[] args) {
             //Decide which mode we are operating in based on the filename of the current executable. If the file executable is EasyCoreCompatibility, then attempt to update the game. Beware of recursive stuff.
-            //If the filename is NOT EasyCoreCompatiblity.exe, then assume we are the videogame replacement executable and 
+            //If the filename is NOT EasyAffinity.exe, then assume we are the videogame replacement executable and 
 
             if (System.AppDomain.CurrentDomain.FriendlyName == "EasyAffinity.exe") {
                 PatchGame();
@@ -22,22 +24,25 @@ namespace EasyAffinity {
             else {
                 RunProgram();
             }
-
         }
 
         static void PatchGame() {
             string gameName = FindGame();
             if(File.Exists(gameName + "_backup.exe")) {
-                //TODO implement code to revert the change.
+                //If a backup exe exists, we assume that the program has been run before.
+                //Complications could arise if the user deleted the backup exe.
                 while(true) {
                     Console.WriteLine("This game already appears to have been converted. Revert changes? [Y/N] ");
                     string response = Console.ReadLine();
                     if (response == "y" || response == "Y") {
                         Revert(gameName);
+                        Console.WriteLine("Game reverted to initial state. Press any key to close.");
+                        Console.ReadKey();
                         Environment.Exit(0);
                     }
                     if (response == "n" || response == "N") {
-                        Console.WriteLine("Placeholder.");
+                        Console.WriteLine("Further action could break the game. Press any key to exit.");
+                        Console.ReadKey();
                         Environment.Exit(0);
                     }
                 }
