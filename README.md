@@ -1,5 +1,5 @@
 # EasyAffinity
-A program to simplify the process of forcing older PC games to use a single CPU core.
+A program to simplify the process of forcing older PC games to use a single CPU core. Please be aware that setting Windows Compatibility Mode for applications to Windows XP will accomplish the same thing. There are also a few other programs that modify game executable affinity, however they tend to require command line usage.
 
 Copy EasyAffinity.exe into the game directory, and run it. If the game is whitelisted, everything will be handled automatically. If not, you will need to provide the executable name. The original executable will be copied to name_executable.exe, as well as backed up. The original executable will be replaced by a version that calls name_executable.exe via a batch file, setting affinity to one core in the process.
 
