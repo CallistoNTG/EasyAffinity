@@ -5,4 +5,4 @@ Copy EasyAffinity.exe into the game directory, and run it. If the game is whitel
 
 Running the program again will give the option of reverting the changes.
 
-This is a cute little project that was fun to write.
+This is a cute little project that was fun to write. And to my pleasant surprise, its underlying ideas were useful for creating the 007 Blood Stone fix.
